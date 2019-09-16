@@ -21,7 +21,7 @@ var lineHeight = FONT_SIZE + 5;
 // Функция для отрисовки модальных окон
 var renderCloud = function (ctx, x, y, width, height, color) {
   ctx.fillStyle = color;
-  return (ctx.fillStyle, ctx.fillRect(x, y, width, height));
+  ctx.fillRect(x, y, width, height);
 };
 
 // Поиск максимального значения в массиве
