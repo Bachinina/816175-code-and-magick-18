@@ -46,28 +46,15 @@ var renderWizard = function (wizardParams) {
   return wizardTemplate;
 };
 
-// Добавление волшебников в разметку (способ №1)
-var wizardsQuantity = 4;
+// Добавление волшебников в разметку
 
-var fragment = document.createDocumentFragment();
-for (var i = 0; i < wizardsQuantity; i++) {
-  var wizards = generateWizards(wizardsQuantity);
-  fragment.appendChild(renderWizard(wizards[i]));
-}
-
-document.querySelector('.setup-similar-list').appendChild(fragment);
-
-
-// Добавление волшебников в разметку (способ №2)
-
-/*
-var renderWizards = function (arr) {
-    for (var i = 0; i < arr.length; i++) {
-
-        var wizard = renderWizard(arr[i]);
-        document.querySelector('.setup-similar-list').appendChild(wizard);
-
-    };
+var renderWizards = function (quantity) {
+  var fragment = document.createDocumentFragment();
+  for (var i = 0; i < quantity; i++) {
+    var wizards = generateWizards(quantity);
+    fragment.appendChild(renderWizard(wizards[i]));
+  }
+  return document.querySelector('.setup-similar-list').appendChild(fragment);
 };
-renderWizards(generateWizards(4));
-*/
+
+renderWizards(4);
