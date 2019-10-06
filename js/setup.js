@@ -6,6 +6,11 @@
   var setupClose = document.querySelector('.setup-close');
   var setupUserName = document.querySelector('.setup-user-name');
 
+  var setupDefaultCoords = {
+    top: '80px',
+    left: '50%'
+  };
+
   // Обработка событий
   var onSetupEscPress = function (evt) {
     window.utils.isEscKeyCode(evt, function () {
@@ -18,11 +23,15 @@
   var openSetup = function () {
     setup.classList.remove('hidden');
     document.addEventListener('keydown', onSetupEscPress);
+    upload.addEventListener('mousedown', onUploadMouseDown);
   };
 
   var closeSetup = function () {
     setup.classList.add('hidden');
     document.removeEventListener('keydown', onSetupEscPress);
+    upload.removeEventListener('mousedown', onUploadMouseDown);
+    setup.style.left = setupDefaultCoords.left;
+    setup.style.top = setupDefaultCoords.top;
   };
 
   // Открытие попапа
@@ -47,6 +56,7 @@
 
   var onUploadMouseDown = function (evt) {
     evt.preventDefault();
+
     var startCoords = {
       x: evt.clientX,
       y: evt.clientY
@@ -90,6 +100,4 @@
     document.addEventListener('mousemove', onUploadMouseMove);
     document.addEventListener('mouseup', onUploadMouseUp);
   };
-
-  upload.addEventListener('mousedown', onUploadMouseDown);
 })();
