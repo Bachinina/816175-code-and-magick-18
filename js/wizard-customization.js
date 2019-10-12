@@ -1,5 +1,7 @@
 'use strict';
 (function () {
+  var setup = document.querySelector('.setup');
+  var form = document.querySelector('.setup-wizard-form');
   var setupUserName = document.querySelector('.setup-user-name');
 
   // Настройка персонажа
@@ -40,5 +42,17 @@
     } else {
       setupUserName.setCustomValidity('');
     }
+  });
+
+  // Отправка формы
+  var URL = 'https://js.dump.academy/code-and-magick';
+
+  var onLoad = function () {
+    setup.classList.add('hidden');
+  };
+
+  form.addEventListener('submit', function (evt) {
+    evt.preventDefault();
+    window.backend.save(URL, new FormData(form), onLoad, window.error);
   });
 })();
