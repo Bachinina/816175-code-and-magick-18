@@ -4,43 +4,33 @@
 
   var template = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
 
-  // Генерация волшебников
-  var generateWizards = function (quantity) {
-    // Создаем пустой массив
-    var wizardsArray = [];
-
-    // Генерируем параметры заданного количества(quantity) волшебников
-    for (var i = 0; i < quantity; i++) {
-      wizardsArray[i] = {
-        name: window.utils.randomElement(window.wizardParameters.firstNames) + ' ' + window.utils.randomElement(window.wizardParameters.lastNames),
-        coatColor: window.utils.randomElement(window.wizardParameters.coatColors),
-        eyesColor: window.utils.randomElement(window.wizardParameters.eyesColors)
-      };
-    }
-    return wizardsArray;
-  };
-
   // Отрисовка волшебника по шаблону
   var renderWizard = function (wizardParams) {
     var wizardTemplate = template.cloneNode(true);
 
     wizardTemplate.querySelector('.setup-similar-label').textContent = wizardParams.name;
-    wizardTemplate.querySelector('.wizard-coat').style.fill = wizardParams.coatColor;
-    wizardTemplate.querySelector('.wizard-eyes').style.fill = wizardParams.eyesColor;
+    wizardTemplate.querySelector('.wizard-coat').style.fill = wizardParams.colorCoat;
+    wizardTemplate.querySelector('.wizard-eyes').style.fill = wizardParams.colorEyes;
 
     return wizardTemplate;
   };
 
   // Добавление волшебников в разметку
-
-  var renderWizards = function (quantity) {
+  var renderWizards = function (arr) {
     var fragment = document.createDocumentFragment();
-    for (var i = 0; i < quantity; i++) {
-      var wizards = generateWizards(quantity);
-      fragment.appendChild(renderWizard(wizards[i]));
+    for (var i = 0; i < 4; i++) {
+      var wizard = window.utils.randomElement(arr);
+      fragment.appendChild(renderWizard(wizard));
     }
     return document.querySelector('.setup-similar-list').appendChild(fragment);
   };
 
-  renderWizards(4);
+  // Загрузка данных с сервера
+  var URL = 'https://js.dump.academy/code-and-magick/data';
+
+  var onLoad = function (response) {
+    renderWizards(response);
+  };
+
+  window.backend.load('GET', URL, onLoad, window.error, null);
 })();
