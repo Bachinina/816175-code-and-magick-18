@@ -53,6 +53,6 @@
 
   form.addEventListener('submit', function (evt) {
     evt.preventDefault();
-    window.backend.save(URL, new FormData(form), onLoad, window.error);
+    window.backend.save('POST', URL, onLoad, window.error, new FormData(form));
   });
 })();

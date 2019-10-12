@@ -32,5 +32,5 @@
     renderWizards(response);
   };
 
-  window.backend.load(URL, onLoad, window.error);
+  window.backend.load('GET', URL, onLoad, window.error, null);
 })();
