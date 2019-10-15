@@ -1,5 +1,11 @@
 'use strict';
 (function () {
+  window.wizardCustomization = {
+    onCoatChange: function () {},
+    onEyesChange: function () {}
+  };
+
+
   var setup = document.querySelector('.setup');
   var form = document.querySelector('.setup-wizard-form');
   var setupUserName = document.querySelector('.setup-user-name');
@@ -17,12 +23,14 @@
     var color = window.utils.randomElement(window.wizardParameters.coatColors);
     wizardsCoat.style.fill = color;
     wizardsCoatInput.value = color;
+    window.wizardCustomization.onCoatChange(color);
   });
 
   wizardsEyes.addEventListener('click', function () {
     var color = window.utils.randomElement(window.wizardParameters.eyesColors);
     wizardsEyes.style.fill = color;
     wizardsEyesInput.value = color;
+    window.wizardCustomization.onEyesChange(color);
   });
 
   wizardsFireball.addEventListener('click', function () {
